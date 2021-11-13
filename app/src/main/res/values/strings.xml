@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">校园随手拍</string>
+    <string name="login_name">登陆界面</string>
+    <string name="register_name">注册界面</string>
+    <string name="camera_name">注册界面</string>
+    <string name="news_name">新闻列表</string>
+    <string name="homepage_name">主页</string>
+    <string name="takephoto_name">随手拍</string>
+    <string name="user_information">个人信息</string>
+    <string name="map_name">地图界面</string>
+</resources>

@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name='CQ_10.14_task'

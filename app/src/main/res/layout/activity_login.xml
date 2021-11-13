@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.AndroidTask.EnterFram.Login"
+    android:theme="@android:style/Theme.Translucent"
+    android:background="@drawable/login_picture"
+    >
+
+    <TextView
+        android:id="@+id/t_1"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:text="账号"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_1"
+        android:layout_width="match_parent"
+        android:lines="1"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
+        android:layout_toRightOf="@+id/t_1" />
+
+    <TextView
+        android:id="@+id/t_2"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/t_1"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="密码"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:lines="1"
+        android:password="true"
+        android:layout_below="@id/et_1"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@+id/t_2" />
+
+    <Button
+        android:id="@+id/btn_denglu"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/et_2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_circle_shape"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_woyaozhuce"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/btn_denglu"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:text="我要注册"
+        android:textColor="@color/light_blue"
+        android:textSize="20sp"/>
+
+
+</RelativeLayout>
