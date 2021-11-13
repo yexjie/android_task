@@ -8,6 +8,8 @@ import android.view.ViewConfiguration;
 import androidx.core.view.MotionEventCompat;
 import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 
+import com.example.AndroidTask.Database.MyApplication;
+
 
 public class PageEnabledSlidingPaneLayout extends SlidingPaneLayout {
     private float mInitialMotionX;

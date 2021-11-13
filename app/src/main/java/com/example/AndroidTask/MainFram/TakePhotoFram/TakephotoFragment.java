@@ -2,6 +2,7 @@ package com.example.AndroidTask.MainFram.TakePhotoFram;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,11 +18,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.AndroidTask.EnterFram.RegisterActivity;
+import com.example.AndroidTask.MainFram.EnterMainFram;
 import com.example.cq_1014_task.R;
 
 public class TakephotoFragment extends Fragment {
@@ -31,7 +35,13 @@ public class TakephotoFragment extends Fragment {
     private RadioGroup rg_content,rg_important;
     private TextView t_tag_question;
     private TextView t_tag_important;
-    private Button open_map;
+    private ImageButton open_map;
+    private TextView myLocation = null;
+    private ImageView imageView;
+
+    private final int ReturnLocation=1;//返回地址定位
+    private final int OPEN_RESULT = 2; // 打开相机
+    private final int PICK_RESULT = 3; // 查看相册
 
     private void setListeners(){
         OnClick onClick=new OnClick();
@@ -83,16 +93,23 @@ public class TakephotoFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (data != null) {
+        if (requestCode == ReturnLocation) {
+
                 Bundle bundle = data.getExtras();
-                if (bundle != null) {
-                    TextView textView=getView().findViewById(R.id.textView);
-                    //处理代码在此地
-                    String str= bundle.getString("renturnLocation");
-                    textView.setText(str);
-                }
-            }
+                String str= bundle.getString("returnLocation");
+                myLocation.setText("当前位置:"+str);
+        }
+        else if (requestCode == OPEN_RESULT) {
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = (Bitmap) bundle.get("data");
+            imageView.setImageBitmap(bitmap);
+            // returnpic.setImageBitmap(bitmap);
+        }
+        else if (requestCode == PICK_RESULT) {
+            // 表示选择图片库的图片结果
+            Uri uri = data.getData();
+            imageView.setImageURI(uri);
+            // returnpic.setImageURI(uri);
         }
     }
 
@@ -110,7 +127,9 @@ public class TakephotoFragment extends Fragment {
         rb_important=(RadioButton) getView().findViewById(R.id.rb_important);
         rg_content=(RadioGroup) getView().findViewById(R.id.rg_content);
         rg_important=(RadioGroup) getView().findViewById(R.id.rg_important);
-        open_map=(Button) getView().findViewById(R.id.openMap);
+        open_map=(ImageButton) getView().findViewById(R.id.openMap);
+        myLocation=(TextView) getView().findViewById(R.id.textView);
+        imageView=(ImageView) getView().findViewById(R.id.imgPotho);
 
         t_tag_question=(TextView) getView().findViewById(R.id.t_tag_question);
         t_tag_important=(TextView) getView().findViewById(R.id.t_tag_important);

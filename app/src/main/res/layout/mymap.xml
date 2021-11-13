@@ -27,14 +27,15 @@
         app:layout_constraintTop_toTopOf="@id/mapView" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="276dp"
-        android:layout_height="56dp"
+        android:id="@+id/location"
+        android:layout_width="288dp"
+        android:layout_height="44dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_toStartOf="@+id/but_finishLoc"
         android:layout_toLeftOf="@+id/but_finishLoc"
+        android:background="@color/white"
         android:text="当前定位信息：" />
 </RelativeLayout>

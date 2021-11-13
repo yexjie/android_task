@@ -2,9 +2,12 @@ package com.example.AndroidTask.MainFram.TakePhotoFram;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -19,12 +22,17 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.example.AndroidTask.MainFram.EnterMainFram;
 import com.example.cq_1014_task.R;
 
 public class OpenMap extends AppCompatActivity {
     private MapView mMapView = null;
     private BaiduMap mBaiduMap = null;
     private LocationClient mLocationClient = null;
+    private TextView myLocation = null;
+    TextView textView=null;
+    Button finishLoc=null;
+
     StringBuilder currentPosition;
     // 是否是第一次定位
     private boolean isFirstLocate = true;
@@ -36,17 +44,19 @@ public class OpenMap extends AppCompatActivity {
 
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.mymap);
-        Button finishLoc=findViewById(R.id.but_finishLoc);
+        finishLoc=findViewById(R.id.but_finishLoc);
         finishLoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*String str = currentPosition.toString().trim();
-                Intent intent = this.getIntent();
-                Bundle bundle = intent.getExtras();
-                bundle.putString("renturnLocation", str);//添加要返回给页面1的数据
+                String location = currentPosition.toString().trim();
+                Intent intent=new Intent(OpenMap.this, EnterMainFram.class);
+                Bundle bundle=new Bundle();
+                //textView=findViewById(R.id.textView);
+                //textView.setText("当前位置:\n"+location);
+                bundle.putString("returnLocation",location);
                 intent.putExtras(bundle);
-                this.setResult(Activity.RESULT_OK, intent);//返回页面1
-                this.finish();*/
+                setResult(Activity.RESULT_OK, intent);
+                finish();
             }
         });
         mLocationClient = new LocationClient(getApplicationContext());
@@ -57,6 +67,8 @@ public class OpenMap extends AppCompatActivity {
 
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         mBaiduMap.setMyLocationEnabled(true);
+        myLocation=findViewById(R.id.location);
+
 
 
 
@@ -84,6 +96,7 @@ public class OpenMap extends AppCompatActivity {
                 currentPosition.append(location.getCity());
                 currentPosition.append(location.getDistrict());
                 currentPosition.append(location.getStreet());
+                myLocation.setText("当前位置信息："+location.getProvince()+","+location.getCity()+","+location.getDistrict()+","+location.getStreet());
                // Toast.makeText(getApplicationContext(),location.getLatitude()+","+location.getAltitude(),Toast.LENGTH_LONG).show();
             }
             else {

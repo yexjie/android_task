@@ -19,6 +19,7 @@
         android:id="@+id/et_1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:hint="请输入您的账号..."
         android:lines="1"
         android:layout_below="@+id/t_1" />
 
@@ -34,6 +35,7 @@
         android:id="@+id/et_2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:hint="请输入您的密码..."
         android:password="true"
         android:layout_below="@+id/t_2" />
 
@@ -50,6 +52,7 @@
         android:id="@+id/et_3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:hint="请确认您的密码..."
         android:password="true"
         android:layout_below="@+id/t_3" />
 
