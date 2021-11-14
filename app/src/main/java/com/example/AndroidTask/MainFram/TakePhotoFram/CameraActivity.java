@@ -2,6 +2,7 @@ package com.example.AndroidTask.MainFram.TakePhotoFram;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -26,16 +27,14 @@ public class CameraActivity extends AppCompatActivity {
     private ImageButton returnpic;
 
 
-    private final int OPEN_RESULT = 1; // 打开相机
-    private final int PICK_RESULT = 2; // 查看相册
+    private final int OPEN_RESULT = 2; // 打开相机
+    private final int PICK_RESULT = 3; // 查看相册
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        //Log.i(TAG, "onCreate");
         openbButton = (Button) findViewById(R.id.btnTakePhoto);
-        //takePhoto2 = (Button) findViewById(R.id.btnTakePhoto2);
         pickButton = (Button) findViewById(R.id.btnPick);
         imageView = (ImageView) findViewById(R.id.imgPotho);
         returnpic=(ImageButton)findViewById(R.id.img_camera);
@@ -72,10 +71,14 @@ public class CameraActivity extends AppCompatActivity {
                 Bundle bundle = data.getExtras();
                 Bitmap bitmap = (Bitmap) bundle.get("data");
                 imageView.setImageBitmap(bitmap);
+
                 Intent intent=new Intent(CameraActivity.this,EnterMainFram.class);
-                intent.putExtra("bitmap",bitmap);
-                startActivity(intent);
-               // returnpic.setImageBitmap(bitmap);
+
+                Bundle bundle1=new Bundle();
+                bundle1.putParcelable("bitmap",bitmap);
+                intent.putExtras(bundle1);
+                setResult(OPEN_RESULT, intent);
+                finish();
             }
         } else if (requestCode == PICK_RESULT) {
             // 表示选择图片库的图片结果
@@ -83,9 +86,9 @@ public class CameraActivity extends AppCompatActivity {
                 Uri uri = data.getData();
                 imageView.setImageURI(uri);
                 Intent intent=new Intent(CameraActivity.this, EnterMainFram.class);
-                intent.putExtra("uri",uri);
-                startActivity(intent);
-               // returnpic.setImageURI(uri);
+                intent.setData(uri);
+                setResult(PICK_RESULT, intent);
+                finish();
             }
         }
     }

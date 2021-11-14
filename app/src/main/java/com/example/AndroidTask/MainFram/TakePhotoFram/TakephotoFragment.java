@@ -93,23 +93,20 @@ public class TakephotoFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ReturnLocation) {
-
-                Bundle bundle = data.getExtras();
-                String str= bundle.getString("returnLocation");
-                myLocation.setText("当前位置:"+str);
-        }
-        else if (requestCode == OPEN_RESULT) {
+        if (resultCode == ReturnLocation) {
             Bundle bundle = data.getExtras();
-            Bitmap bitmap = (Bitmap) bundle.get("data");
-            imageView.setImageBitmap(bitmap);
-            // returnpic.setImageBitmap(bitmap);
+            String str= bundle.getString("returnLocation");
+            myLocation.setText("当前位置:"+str);
         }
-        else if (requestCode == PICK_RESULT) {
+        else if (resultCode == OPEN_RESULT) {
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = (Bitmap) bundle.getParcelable("bitmap");
+            openCamera.setImageBitmap(bitmap);
+        }
+        else if (resultCode == PICK_RESULT) {
             // 表示选择图片库的图片结果
             Uri uri = data.getData();
-            imageView.setImageURI(uri);
-            // returnpic.setImageURI(uri);
+            openCamera.setImageURI(uri);
         }
     }
 
@@ -129,7 +126,6 @@ public class TakephotoFragment extends Fragment {
         rg_important=(RadioGroup) getView().findViewById(R.id.rg_important);
         open_map=(ImageButton) getView().findViewById(R.id.openMap);
         myLocation=(TextView) getView().findViewById(R.id.textView);
-        imageView=(ImageView) getView().findViewById(R.id.imgPotho);
 
         t_tag_question=(TextView) getView().findViewById(R.id.t_tag_question);
         t_tag_important=(TextView) getView().findViewById(R.id.t_tag_important);
@@ -156,23 +152,22 @@ public class TakephotoFragment extends Fragment {
                 startActivityForResult(intent2, 1);
             }
         });
-        Intent intent=getActivity().getIntent();
         //if(intent==null){
         openCamera.setImageDrawable(getResources().getDrawable(R.drawable.add));
         //}
-        if(intent!=null){
+        /*if(intent!=null){
             Bitmap bitmap=intent.getParcelableExtra("bitmap");
-            /*FragmentManager fm = getActivity().getFragmentManager();
+            *//*FragmentManager fm = getActivity().getFragmentManager();
             //注意v4包的配套使用
             Fragment fragment = new 目标fragment();
-            fm.beginTransaction().replace(容器控件id,fragment).commit();*/
+            fm.beginTransaction().replace(容器控件id,fragment).commit();*//*
             openCamera.setImageBitmap(bitmap);
         }
         if(intent!=null){
             Uri uri = intent.getParcelableExtra("uri");
             openCamera.setImageURI(uri);
         }
-        setListeners();
+        setListeners();*/
 
     }
 

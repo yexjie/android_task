@@ -32,6 +32,7 @@ public class OpenMap extends AppCompatActivity {
     private TextView myLocation = null;
     TextView textView=null;
     Button finishLoc=null;
+    private final int ReturnLocation=1;//返回地址定位
 
     StringBuilder currentPosition;
     // 是否是第一次定位
@@ -51,11 +52,9 @@ public class OpenMap extends AppCompatActivity {
                 String location = currentPosition.toString().trim();
                 Intent intent=new Intent(OpenMap.this, EnterMainFram.class);
                 Bundle bundle=new Bundle();
-                //textView=findViewById(R.id.textView);
-                //textView.setText("当前位置:\n"+location);
                 bundle.putString("returnLocation",location);
                 intent.putExtras(bundle);
-                setResult(Activity.RESULT_OK, intent);
+                setResult(ReturnLocation, intent);
                 finish();
             }
         });
